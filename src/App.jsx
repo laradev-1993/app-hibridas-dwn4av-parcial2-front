@@ -1,16 +1,9 @@
-import Header from './components/Header.jsx'
-import Footer from './components/Footer.jsx'
-
 function App() {
-  
-  return(
+  return (
     <>
-      <Header/>
-      <Footer/>
-
-    </>  
-  );
-
+      <h1>API de Turnos</h1>
+    </>
+  )
 }
 
 export default App
