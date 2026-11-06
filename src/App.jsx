@@ -5,11 +5,15 @@ import Register from './pages/Register';
 import Perfil from './pages/Perfil';
 import NotFound from './pages/NotFound';
 import ProtectedRoute from './components/ProtectedRoute';
+import Navbar from './components/Navbar';
 
 
 
 function App() {
     return (
+      <>
+      <Navbar />
+
         <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
@@ -21,6 +25,7 @@ function App() {
 
         <Route path="*" element={<NotFound />} />
         </Routes>
+         </>
     );
 }
 
