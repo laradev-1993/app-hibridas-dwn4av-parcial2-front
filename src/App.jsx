@@ -6,7 +6,9 @@ import Perfil from './pages/Perfil';
 import NotFound from './pages/NotFound';
 import ProtectedRoute from './components/ProtectedRoute';
 import Navbar from './components/Navbar';
-
+import AccesoDenegado from './pages/AccesoDenegado';
+import Turnos from './pages/Turnos';
+import RoleRoute from './components/RoleRoute';
 
 
 function App() {
@@ -19,10 +21,16 @@ function App() {
             <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
 
-            <Route element={<ProtectedRoute />}>
-                <Route path="/perfil" element={<Perfil />} />
-            </Route>
+         <Route element={<ProtectedRoute />}>
+            <Route path="/perfil" element={<Perfil />} />
 
+              <Route element={<RoleRoute rolesPermitidos={['admin', 'profesional', 'superAdmin']} />}>
+                  <Route path="/turnos" element={<Turnos />} />
+              </Route>
+
+          </Route>
+
+       <Route path="/acceso-denegado" element={<AccesoDenegado />} />
         <Route path="*" element={<NotFound />} />
         </Routes>
          </>

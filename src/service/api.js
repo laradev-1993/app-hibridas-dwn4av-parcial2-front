@@ -37,3 +37,38 @@ export async function registrarUsuario(nombre, email, password) {
 
   return data;
 }
+
+
+
+export async function fetchPrivado(endpoint, options = {}){
+    const token = sessionStorage.getItem('token');
+    if (!token){
+        throw new Error('No existe una sesión activa');
+    }
+
+    const headers = new Headers(options.headers || {});
+    headers.set('Authorization', `Bearer ${token}`);
+
+    const response = await fetch(`${API_URL}${endpoint}`, {
+        ...options,
+        headers
+    });
+
+
+    const data = await response.json().catch(() => null);
+
+    if (response.status === 401){
+        throw new Error('La sesión es inválida o expiró');
+    }
+
+    if (response.status === 403){
+        throw new Error('Acceso no permitido');
+    }
+
+    if (!response.ok){
+        throw new Error(data?.message || 'Error del servidor');
+    }
+
+    
+    return data;
+}
