@@ -9,6 +9,7 @@ import Navbar from './components/Navbar';
 import AccesoDenegado from './pages/AccesoDenegado';
 import Turnos from './pages/Turnos';
 import RoleRoute from './components/RoleRoute';
+import Pacientes from './pages/Pacientes';
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
 
               <Route element={<RoleRoute rolesPermitidos={['admin', 'profesional', 'superAdmin']} />}>
                   <Route path="/turnos" element={<Turnos />} />
+                   <Route path="/pacientes" element={<Pacientes />} />
               </Route>
 
           </Route>
