@@ -23,30 +23,33 @@ function Pacientes() {
 
 
      if (cargando) {
-        return <p>Cargando pacientes...</p>;
-      }
-
-    if (error) {
-        return <p>{error}</p>;
+        return <p className="contenedor">Cargando pacientes...</p>;
     }
 
+     if (error) {
+            return <p className="contenedor">{error}</p>;
+     }
 
 return (
-        <div>
-            <h1>Pacientes</h1>
+    <div className="contenedor">
+        <h1>Pacientes</h1>
 
-            {pacientes.length === 0 ? (<p>No hay pacientes cargados.</p>) : (
-                pacientes.map((paciente) => (
-                    <div key={paciente._id}>
+        {pacientes.length === 0 ? (
+            <p>No hay pacientes cargados.</p>
+        ) : (
+            <div className="lista-tarjetas">
+                {pacientes.map((paciente) => (
+                    <div className="tarjeta" key={paciente._id}>
                         <h2>{paciente.nombreCompleto}</h2>
                         <p>Edad: {paciente.edad}</p>
                         <p>Teléfono: {paciente.telefono}</p>
                         <p>Obra social: {paciente.obraSocial}</p>
                     </div>
-                ))
-            )}
-        </div>
-    );
+                ))}
+            </div>
+        )}
+    </div>
+);
 }
 
 export default Pacientes;

@@ -1,0 +1,251 @@
+:root {
+    --color-blanco: #FEFEFE;
+    --color-aguamarina: #E5EDED;
+    --color-verde-oscuro: #044344;
+
+    --fuente-titulos: 'Urbanist', sans-serif;
+    --fuente-texto: 'Open Sans', sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background-color: var(--color-aguamarina);
+    color: var(--color-verde-oscuro);
+    font-family: var(--fuente-texto);
+}
+
+h1,
+h2,
+h3 {
+    font-family: var(--fuente-titulos);
+    color: var(--color-verde-oscuro);
+}
+
+a {
+    color: var(--color-verde-oscuro);
+}
+
+/*--- Navbar ------*/
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: var(--color-verde-oscuro);
+}
+
+.navbar-links {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.navbar a {
+    color: var(--color-blanco);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.navbar a:hover {
+    text-decoration: underline;
+}
+
+.boton {
+    background-color: var(--color-verde-oscuro);
+    color: var(--color-blanco);
+    border: none;
+    border-radius: 6px;
+    padding: 0.5rem 1rem;
+    font-family: var(--fuente-texto);
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.boton:hover {
+    opacity: 0.85;
+}
+
+.navbar .boton {
+    background-color: var(--color-blanco);
+    color: var(--color-verde-oscuro);
+}
+
+/* <<< Vista Paciente >>> */
+.contenedor {
+    max-width: 1000px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.lista-tarjetas {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1rem;
+}
+
+.tarjeta {
+    background-color: var(--color-blanco);
+    border-radius: 8px;
+    padding: 1rem 1.5rem;
+    box-shadow: 0 2px 6px rgba(4, 67, 68, 0.15);
+}
+
+.tarjeta h2 {
+    margin-top: 0;
+    font-size: 1.25rem;
+}
+
+.tarjeta p {
+    margin: 0.25rem 0;
+}
+
+/*---- VISTA TURNOS  ---- */
+.lista-turnos {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.turno-item {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    background-color: var(--color-blanco);
+    border-radius: 16px;
+    padding: 1rem 1.5rem;
+    box-shadow: 0 2px 6px rgba(4, 67, 68, 0.15);
+}
+
+.turno-hora {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 100px;
+    padding: 0.75rem;
+    border-radius: 12px;
+    background-color: var(--color-aguamarina);
+}
+
+.turno-hora strong {
+    font-family: var(--fuente-titulos);
+    font-size: 1.25rem;
+}
+
+.turno-hora span {
+    font-size: 0.8rem;
+}
+
+.turno-info h2 {
+    margin: 0 0 0.25rem;
+    font-size: 1.15rem;
+}
+
+.turno-info p {
+    margin: 0.15rem 0;
+}
+
+.turno-estado {
+    margin-left: auto;
+    padding: 0.35rem 1rem;
+    border-radius: 999px;
+    background-color: var(--color-verde-oscuro);
+    color: var(--color-blanco);
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+
+/* ------ FORMULARIO LOGIN Y REGISTER ---- */
+
+.contenedor-formulario {
+    max-width: 420px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: var(--color-blanco);
+    border-radius: 16px;
+    box-shadow: 0 2px 6px rgba(4, 67, 68, 0.15);
+}
+
+.contenedor-formulario h1 {
+    margin-top: 0;
+    text-align: center;
+    font-size: 1.75rem;
+}
+
+.formulario {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.formulario label {
+    margin-top: 0.5rem;
+    font-weight: 600;
+}
+
+.formulario input {
+    padding: 0.6rem 0.75rem;
+    border: 1px solid var(--color-verde-oscuro);
+    border-radius: 8px;
+    background-color: var(--color-blanco);
+    color: var(--color-verde-oscuro);
+    font-family: var(--fuente-texto);
+    font-size: 1rem;
+}
+
+.formulario input:focus {
+    outline: 2px solid var(--color-verde-oscuro);
+    outline-offset: 1px;
+}
+
+.formulario .boton {
+    margin-top: 1rem;
+    padding: 0.7rem 1rem;
+}
+
+.formulario .boton:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.mensaje-error {
+    margin: 1rem 0 0;
+    text-align: center;
+    font-weight: 600;
+    color: #9b1c1c;
+}
+
+
+/*--- -------- Home ---------*/
+.tarjeta ul {
+    list-style: none;
+    padding: 0;
+}
+
+
+.pagina-centrada {
+    text-align: center;
+}
+
+.portada {
+    padding: 3rem 1rem;
+    text-align: center;
+}
+
+.acciones {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+a.boton {
+    display: inline-block;
+    text-decoration: none;
+    color: var(--color-blanco);
+}

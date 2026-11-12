@@ -44,57 +44,59 @@ function Register() {
   }
 
   return (
-    <>
+   
+    <div className="contenedor-formulario">
       <h1>Crear cuenta</h1>
 
-      <form onSubmit={handleSubmitRegister}>
-        <label htmlFor="nombre">Nombre</label>
-        <input
-          type="text"
-          id="nombre"
-          name="nombre"
-          value={user.nombre}
-          onChange={handleChange}
-          required
-        />
+        <form className="formulario" onSubmit={handleSubmitRegister}>
+            <label htmlFor="nombre">Nombre</label>
+            <input
+              type="text"
+              id="nombre"
+              name="nombre"
+              value={user.nombre}
+              onChange={handleChange}
+              required
+            />
 
-        <label htmlFor="email">Email</label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          value={user.email}
-          onChange={handleChange}
-          required
-        />
+            <label htmlFor="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value={user.email}
+              onChange={handleChange}
+              required
+            />
 
-        <label htmlFor="password">Contraseña</label>
-        <input
-          type="password"
-          id="password"
-          name="password"
-          value={user.password}
-          onChange={handleChange}
-          required
-        />
+            <label htmlFor="password">Contraseña</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              value={user.password}
+              onChange={handleChange}
+              required
+            />
 
-        <label htmlFor="confirmPassword">Repetir contraseña</label>
-        <input
-          type="password"
-          id="confirmPassword"
-          name="confirmPassword"
-          value={user.confirmPassword}
-          onChange={handleChange}
-          required
-        />
+            <label htmlFor="confirmPassword">Repetir contraseña</label>
+            <input
+              type="password"
+              id="confirmPassword"
+              name="confirmPassword"
+              value={user.confirmPassword}
+              onChange={handleChange}
+              required
+            />
 
-        <button type="submit" disabled={cargando}>
-          {cargando ? 'Registrando...' : 'Registrarme'}
-        </button>
-      </form>
+            <button className="boton" type="submit" disabled={cargando}>
+              {cargando ? 'Registrando...' : 'Registrarme'}
+            </button>
+        </form>
 
-      <p>{error}</p>
-    </>
+      <p className="mensaje-error">{error}</p>
+    </div>
+    
   )
 }
 

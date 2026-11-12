@@ -31,33 +31,35 @@ function Login() {
 
   return (
     <>
-      <h1>Iniciar sesión</h1>
+    <div className="contenedor-formulario">
+        <h1>Iniciar sesión</h1>
 
-      <form onSubmit={handleSubmitLogin}>
-        <label htmlFor="email">Email</label>
-        <input
-          type="email"
-          id="email"
-          value={email}
-          onChange={(event) => setEmail(event.target.value)}
-          required
-        />
+        <form className="formulario" onSubmit={handleSubmitLogin}>
+          <label htmlFor="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
+            required
+          />
 
-        <label htmlFor="password">Contraseña</label>
-        <input
-          type="password"
-          id="password"
-          value={password}
-          onChange={(event) => setPassword(event.target.value)}
-          required
-        />
+          <label htmlFor="password">Contraseña</label>
+          <input
+            type="password"
+            id="password"
+            value={password}
+            onChange={(event) => setPassword(event.target.value)}
+            required
+          />
 
-        <button type="submit" disabled={cargando}>
-          {cargando ? 'Ingresando...' : 'Ingresar'}
-        </button>
-      </form>
+          <button className="boton" type="submit" disabled={cargando}>
+            {cargando ? 'Ingresando...' : 'Ingresar'}
+          </button>
+        </form>
 
-      <p>{error}</p>
+        <p className="mensaje-error">{error}</p>
+      </div>
     </>
   )
 }

@@ -5,12 +5,12 @@ function Home() {
   const { autenticado, user } = useAuth();
 
   return (
-    <>
+    <div className={autenticado ? 'contenedor' : 'contenedor portada'}>
       <h1>API de Turnos</h1>
 
       {
         autenticado ?
-          <section>
+          <section className="tarjeta">
             <h2>Hola, {user.nombre}</h2>
             <p>Rol: {user.role}</p>
           </section>
@@ -20,11 +20,13 @@ function Home() {
               Sistema de gestión de turnos médicos: para registrar pacientes,
               agendar turnos y llevar el control de cada consulta.
             </p>
-            <Link to="/login">Iniciar sesión</Link>
-            <Link to="/register">Crear cuenta</Link>
+            <div className="acciones">
+              <Link className="boton" to="/login">Iniciar sesión</Link>
+              <Link className="boton" to="/register">Crear cuenta</Link>
+            </div>
           </section>
       }
-    </>
+    </div>
   )
 }
 

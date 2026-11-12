@@ -24,34 +24,55 @@ function Turnos() {
 
 
     if (cargando) {
-        return <p>Cargando turnos...</p>;
+        return <p className="contenedor">Cargando turnos...</p>;
     }
 
     if (error) {
-        return <p>{error}</p>;
-    }
+        return <p className="contenedor">{error}</p>;
+   }
 
+// ordenar los turnos de menor a mayor  
+   const turnosOrdenados = [...turnos].sort(
+    (a, b) => new Date(a.fechaHora) - new Date(b.fechaHora)
+);
 
     return (
-        <div>
-            <h1>Turnos</h1>
+    <div className="contenedor">
+        <h1>Turnos</h1>
 
-            {turnos.length === 0 ? (
-                <p>No hay turnos cargados.</p>
-            ) : (
-                turnos.map((turno) => (
-                    <div key={turno._id}>
-                        <h2>{turno.paciente?.nombreCompleto}</h2>
-                        <p>Profesional: {turno.profesional}</p>
-                        <p>Fecha: {new Date(turno.fechaHora).toLocaleString('es-AR')}</p>
-                        <p>Motivo: {turno.motivoConsulta}</p>
-                        <p>Estado: {turno.estadoTurno}</p>
-                        <p>¿Primera vez?: {turno.primeraVez ? 'Sí' : 'No'}</p>
-                    </div>
-                ))
-            )}
-        </div>
-    );
+        {turnos.length === 0 ? ( <p>No hay turnos cargados.</p>
+        ) : (
+            <div className="lista-turnos">
+                {turnosOrdenados.map((turno) => {
+                    const fecha = new Date(turno.fechaHora);
+                    const hora = fecha.toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit' });
+                    const dia = fecha.toLocaleDateString('es-AR');
+
+                    return (
+                        <div className="turno-item" key={turno._id}>
+                            <div className="turno-hora">
+                                <strong>{hora}</strong>
+                                <span>{dia}</span>
+                            </div>
+
+                            <div className="turno-info">
+                                <h2>{turno.paciente?.nombreCompleto}</h2>
+                                <p><strong>{turno.profesional}</strong></p>
+                                <p>{turno.motivoConsulta}</p>
+                        
+                                <p>¿Primera vez?: {turno.primeraVez ? 'Sí' : 'No'}</p>
+                        
+    
+                            </div>
+
+                            <span className="turno-estado">{turno.estadoTurno}</span>
+                        </div>
+                    );
+                })}
+            </div>
+        )}
+    </div>
+);
 }
 
 export default Turnos;

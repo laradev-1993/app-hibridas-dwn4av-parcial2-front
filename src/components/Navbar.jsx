@@ -13,28 +13,32 @@ function Navbar() {
         navigate('/login');
     };
 
-    return (
-        <nav>
-            <Link to="/">Home</Link>
+        return (
+        <nav className="navbar">
+            <div className="navbar-links">
+                <Link to="/">Home</Link>
 
-            {puedeGestionar && (
-                <>
-                    <Link to="/turnos">Turnos</Link>
-                    <Link to="/pacientes">Pacientes</Link>
-                </>
-            )}
+                {puedeGestionar && (
+                    <>
+                        <Link to="/turnos">Turnos</Link>
+                        <Link to="/pacientes">Pacientes</Link>
+                    </>
+                )}
+            </div>
 
-            {autenticado ? (
-                <>
-                    <Link to="/perfil">Perfil</Link>
-                    <button onClick={handleLogout}>Cerrar sesión</button>
-                </>
-            ) : (
-                <>
-                    <Link to="/login">Iniciar sesión</Link>
-                    <Link to="/register">Registrarse</Link>
-                </>
-            )}
+            <div className="navbar-links">
+                {autenticado ? (
+                    <>
+                        <Link to="/perfil">Perfil</Link>
+                        <button className="boton" onClick={handleLogout}>Cerrar sesión</button>
+                    </>
+                ) : (
+                    <>
+                        <Link to="/login">Iniciar sesión</Link>
+                        <Link to="/register">Registrarse</Link>
+                    </>
+                )}
+            </div>
         </nav>
     );
 }
