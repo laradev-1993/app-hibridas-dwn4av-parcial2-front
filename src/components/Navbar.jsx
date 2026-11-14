@@ -1,5 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import logo from '../assets/logo_api.png';
 
 const ROLES_PANEL = ['admin', 'profesional', 'superAdmin'];
 
@@ -16,7 +17,11 @@ function Navbar() {
         return (
         <nav className="navbar">
             <div className="navbar-links">
-                
+
+                  <Link to="/" className="navbar-logo">
+                    <img src={logo} alt="Inicio - API de Turnos" />
+                </Link>
+
                 <Link to="/">Home</Link>
 
                 {puedeGestionar ? (

@@ -54,6 +54,12 @@ a {
     text-decoration: underline;
 }
 
+.navbar-logo img {
+    display: block;
+    height: 40px;
+   
+}
+
 .boton {
     background-color: var(--color-verde-oscuro);
     color: var(--color-blanco);
