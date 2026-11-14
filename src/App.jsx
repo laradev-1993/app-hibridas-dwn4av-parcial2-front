@@ -11,7 +11,7 @@ import AccesoDenegado from './pages/AccesoDenegado';
 import Turnos from './pages/Turnos';
 import RoleRoute from './components/RoleRoute';
 import Pacientes from './pages/Pacientes';
-
+import NuevoTurno from './pages/NuevoTurno';
 
 function App() {
     return (
@@ -29,6 +29,10 @@ function App() {
               <Route element={<RoleRoute rolesPermitidos={['admin', 'profesional', 'superAdmin']} />}>
                   <Route path="/turnos" element={<Turnos />} />
                    <Route path="/pacientes" element={<Pacientes />} />
+              </Route>
+
+              <Route element={<RoleRoute rolesPermitidos={['admin', 'superAdmin']} />}>
+                  <Route path="/turnos/nuevo" element={<NuevoTurno />} />
               </Route>
 
           </Route>

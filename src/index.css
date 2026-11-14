@@ -74,6 +74,14 @@ a {
     color: var(--color-verde-oscuro);
 }
 
+/*---- ENCABEZADO ---*/
+.encabezado-pagina {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
 /* <<< Vista Paciente >>> */
 .contenedor {
     max-width: 1000px;
@@ -188,7 +196,8 @@ a {
     font-weight: 600;
 }
 
-.formulario input {
+.formulario input,
+.formulario select {
     padding: 0.6rem 0.75rem;
     border: 1px solid var(--color-verde-oscuro);
     border-radius: 8px;
@@ -198,7 +207,8 @@ a {
     font-size: 1rem;
 }
 
-.formulario input:focus {
+.formulario input:focus,
+.formulario select:focus {
     outline: 2px solid var(--color-verde-oscuro);
     outline-offset: 1px;
 }
@@ -248,4 +258,31 @@ a.boton {
     display: inline-block;
     text-decoration: none;
     color: var(--color-blanco);
+}
+
+
+/*  >>>>  Nuevo turno <<< */
+
+.bloque-paciente {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin: 0 0 0.5rem;
+    padding: 1rem;
+    border: 1px solid var(--color-verde-oscuro);
+    border-radius: 8px;
+}
+
+.resultado-paciente {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--color-aguamarina);
+}
+
+.bloque-paciente h2 {
+    margin: 0;
+    font-size: 1.15rem;
 }

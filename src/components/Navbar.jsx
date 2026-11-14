@@ -16,14 +16,15 @@ function Navbar() {
         return (
         <nav className="navbar">
             <div className="navbar-links">
+                
                 <Link to="/">Home</Link>
 
-                {puedeGestionar && (
-                    <>
-                        <Link to="/turnos">Turnos</Link>
-                        <Link to="/pacientes">Pacientes</Link>
-                    </>
-                )}
+                {puedeGestionar ? (
+                        <>
+                            <Link to="/turnos">Turnos</Link>
+                            <Link to="/pacientes">Pacientes</Link>
+                        </>
+                    ) : null}
             </div>
 
             <div className="navbar-links">

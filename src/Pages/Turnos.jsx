@@ -1,10 +1,15 @@
 import { useEffect, useState } from 'react';
 import { fetchPrivado } from '../service/api';
+import { Link } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 function Turnos() {
     const [turnos, setTurnos] = useState([]);
     const [error, setError] = useState('');
     const [cargando, setCargando] = useState(true);
+
+    const {user} = useAuth();
+    const puedeGestionar = user.role === 'admin' || user.role === 'superAdmin';
 
     useEffect(() => {
         const cargarTurnos = async () => {
@@ -37,11 +42,19 @@ function Turnos() {
 );
 
     return (
-    <div className="contenedor">
-        <h1>Turnos</h1>
+        <div className="contenedor">
+                <div className="encabezado-pagina">
+                    
+                    <h1>Turnos</h1>
 
-        {turnos.length === 0 ? ( <p>No hay turnos cargados.</p>
-        ) : (
+                   {puedeGestionar ? (
+                    
+                        <Link className="boton" to="/turnos/nuevo">Crear turno</Link>
+                    ) : null}
+
+                </div>
+
+        {turnos.length === 0 ? ( <p>No hay turnos cargados.</p>) : (
             <div className="lista-turnos">
                 {turnosOrdenados.map((turno) => {
                     const fecha = new Date(turno.fechaHora);
