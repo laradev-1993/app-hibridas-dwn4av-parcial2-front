@@ -184,6 +184,71 @@ select.turno-estado option {
     color: var(--color-verde-oscuro);
 }
 
+/* --- Acciones turnos */
+
+.turno-acciones {
+    display: flex;
+    gap: 0.5rem;
+}
+
+
+.boton-eliminar {
+    background-color: transparent;
+    color: #9b1c1c;
+    border: 1px solid #9b1c1c;
+}
+
+.boton-eliminar:hover {
+    background-color: rgba(155, 28, 28, 0.08);
+    opacity: 1;
+}
+
+.boton-peligro {
+    background-color: #9b1c1c;
+}
+
+.modal-fondo {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(2, 2, 2, 0.5);
+}
+
+.modal {
+    max-width: 400px;
+    padding: 1.5rem 2rem;
+    border-radius: 16px;
+    background-color: var(--color-blanco);
+    box-shadow: 0 4px 12px rgba(4, 67, 68, 0.3);
+    text-align: center;
+}
+
+.modal p {
+    margin: 0 0 1.5rem;
+    font-weight: 600;
+   
+}
+
+.modal-acciones {
+    display: flex;
+    justify-content: center;
+    gap: 0.75rem;
+}
+
+
+.boton-secundario {
+    background-color: transparent;
+    color: var(--color-verde-oscuro);
+    border: 1px solid var(--color-verde-oscuro);
+}
+
+.boton-secundario:hover {
+    background-color: var(--color-aguamarina);
+    opacity: 1;
+}
 
 /* ------ FORMULARIO LOGIN Y REGISTER ---- */
 

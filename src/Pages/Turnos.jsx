@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { fetchPrivado } from '../service/api';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import ModalConfirmacion from '../components/ModalConfirmacion';
 
 function Turnos() {
     const [turnos, setTurnos] = useState([]);
@@ -11,6 +12,9 @@ function Turnos() {
     const {user} = useAuth();
     const puedeGestionar = user.role === 'admin' || user.role === 'superAdmin';
     const [errorEstado, setErrorEstado] = useState('');
+
+    //eliminar
+    const [idAEliminar, setIdAEliminar] = useState(null);
 
     useEffect(() => {
         const cargarTurnos = async () => {
@@ -47,6 +51,21 @@ async function handleCambiarEstado(id, nuevoEstado) {
         setErrorEstado(err.message);
     }
 }
+       //---- eliminar----------------------------------------
+        async function handleEliminar(id) {
+            setErrorEstado('');
+
+            try {
+                await fetchPrivado(`/api/turnos/${id}`, { method: 'DELETE' });
+                setTurnos(turnos.filter((turno) => turno._id !== id));
+            } catch (err) {
+                setErrorEstado(err.message);
+            } finally {
+                setIdAEliminar(null);
+            }
+        }
+
+
 
     if (cargando) {
         return <p className="contenedor">Cargando turnos...</p>;
@@ -61,72 +80,86 @@ async function handleCambiarEstado(id, nuevoEstado) {
     (a, b) => new Date(a.fechaHora) - new Date(b.fechaHora)
 );
 
-    return (
+
+   return (
         <div className="contenedor">
-                <div className="encabezado-pagina">
+            <div className="encabezado-pagina">
+                <h1>Turnos</h1>
 
-                    {errorEstado ? <p className="mensaje-error">{errorEstado}</p> : null}
+                {puedeGestionar ? (
+                    <Link className="boton" to="/turnos/nuevo">Crear turno</Link>
+                ) : null}
+            </div>
 
-                    <h1>Turnos</h1>
+            {errorEstado ? <p className="mensaje-error">{errorEstado}</p> : null}
 
-                   {puedeGestionar ? (
+            {turnos.length === 0 ? (
 
-                        <Link className="boton" to="/turnos/nuevo">Crear turno</Link>
-                    ) : null}
+                <p>No hay turnos cargados.</p>
+                
+            ) : (
+                <div className="lista-turnos">
+                    {turnosOrdenados.map((turno) => {
+                        const fecha = new Date(turno.fechaHora);
+                        const hora = fecha.toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit' });
+                        const dia = fecha.toLocaleDateString('es-AR');
 
-                </div>
+                        return (
+                            <div className="turno-item" key={turno._id}>
+                                <div className="turno-hora">
+                                    <strong>{hora}</strong>
+                                    <span>{dia}</span>
+                                </div>
 
-        {turnos.length === 0 ? ( <p>No hay turnos cargados.</p>) : (
-            <div className="lista-turnos">
-                {turnosOrdenados.map((turno) => {
-                    const fecha = new Date(turno.fechaHora);
-                    const hora = fecha.toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit' });
-                    const dia = fecha.toLocaleDateString('es-AR');
+                                <div className="turno-info">
+                                    <h2>{turno.paciente?.nombreCompleto}</h2>
+                                    <p><strong>{turno.profesional}</strong></p>
+                                    <p>{turno.motivoConsulta}</p>
+                                    <p>¿Primera vez?: {turno.primeraVez ? 'Sí' : 'No'}</p>
+                                </div>
 
-                    return (
-                        <div className="turno-item" key={turno._id}>
-                            <div className="turno-hora">
-                                <strong>{hora}</strong>
-                                <span>{dia}</span>
-                            </div>
-
-                            <div className="turno-info">
-                                <h2>{turno.paciente?.nombreCompleto}</h2>
-                                <p><strong>{turno.profesional}</strong></p>
-                                <p>{turno.motivoConsulta}</p>
-                        
-                                <p>¿Primera vez?: {turno.primeraVez ? 'Sí' : 'No'}</p>
-                        
-    
-                            </div>
-
-                           {puedeGestionar ? (
+                                {puedeGestionar ? (
                                     <select
-                                            id={`estado-${turno._id}`}
-                                           name="estadoTurno"
-                                             aria-label="Estado del turno"
-                                            className="turno-estado"
-                                            value={turno.estadoTurno}
-                                             onChange={(event) => handleCambiarEstado(turno._id, event.target.value)}
-                                            >
-
+                                        id={`estado-${turno._id}`}
+                                        name="estadoTurno"
+                                        aria-label="Estado del turno"
+                                        className="turno-estado"
+                                        value={turno.estadoTurno}
+                                        onChange={(event) => handleCambiarEstado(turno._id, event.target.value)}
+                                    >
                                         <option value="Pendiente">Pendiente</option>
                                         <option value="Confirmado">Confirmado</option>
                                         <option value="Cancelado">Cancelado</option>
                                         <option value="Completado">Completado</option>
                                     </select>
                                 ) : (
-
-                                     <span className="turno-estado">{turno.estadoTurno}</span>
+                                    <span className="turno-estado">{turno.estadoTurno}</span>
                                 )}
 
-                        </div>
-                    );
-                })}
-            </div>
-        )}
-    </div>
-);
+                                {puedeGestionar ? (
+                                    <button
+                                        type="button"
+                                        className="boton boton-eliminar"
+                                        onClick={() => setIdAEliminar(turno._id)}
+                                    >
+                                        Eliminar
+                                    </button>
+                                ) : null}
+                            </div>
+                        );
+                    })}
+                </div>
+            )}
+
+            {idAEliminar ? (
+                <ModalConfirmacion
+                    mensaje="¿Estás seguro que querés borrar el turno?"
+                    onConfirmar={() => handleEliminar(idAEliminar)}
+                    onCancelar={() => setIdAEliminar(null)}
+                />
+            ) : null}
+        </div>
+    );
 }
 
 export default Turnos;
