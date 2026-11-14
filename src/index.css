@@ -167,6 +167,17 @@ a {
     font-weight: 600;
 }
 
+select.turno-estado {
+    border: none;
+    font-family: var(--fuente-texto);
+    cursor: pointer;
+}
+
+select.turno-estado option {
+    background-color: var(--color-blanco);
+    color: var(--color-verde-oscuro);
+}
+
 
 /* ------ FORMULARIO LOGIN Y REGISTER ---- */
 

@@ -10,6 +10,7 @@ function Turnos() {
 
     const {user} = useAuth();
     const puedeGestionar = user.role === 'admin' || user.role === 'superAdmin';
+    const [errorEstado, setErrorEstado] = useState('');
 
     useEffect(() => {
         const cargarTurnos = async () => {
@@ -27,6 +28,25 @@ function Turnos() {
     }, []);
 
 
+async function handleCambiarEstado(id, nuevoEstado) {
+    setErrorEstado('');
+
+    try {
+        await fetchPrivado(`/api/turnos/${id}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ estadoTurno: nuevoEstado })
+        });
+
+        setTurnos(
+            turnos.map((turno) =>
+                turno._id === id ? { ...turno, estadoTurno: nuevoEstado } : turno
+            )
+        );
+    } catch (err) {
+        setErrorEstado(err.message);
+    }
+}
 
     if (cargando) {
         return <p className="contenedor">Cargando turnos...</p>;
@@ -44,11 +64,13 @@ function Turnos() {
     return (
         <div className="contenedor">
                 <div className="encabezado-pagina">
-                    
+
+                    {errorEstado ? <p className="mensaje-error">{errorEstado}</p> : null}
+
                     <h1>Turnos</h1>
 
                    {puedeGestionar ? (
-                    
+
                         <Link className="boton" to="/turnos/nuevo">Crear turno</Link>
                     ) : null}
 
@@ -78,7 +100,26 @@ function Turnos() {
     
                             </div>
 
-                            <span className="turno-estado">{turno.estadoTurno}</span>
+                           {puedeGestionar ? (
+                                    <select
+                                            id={`estado-${turno._id}`}
+                                           name="estadoTurno"
+                                             aria-label="Estado del turno"
+                                            className="turno-estado"
+                                            value={turno.estadoTurno}
+                                             onChange={(event) => handleCambiarEstado(turno._id, event.target.value)}
+                                            >
+
+                                        <option value="Pendiente">Pendiente</option>
+                                        <option value="Confirmado">Confirmado</option>
+                                        <option value="Cancelado">Cancelado</option>
+                                        <option value="Completado">Completado</option>
+                                    </select>
+                                ) : (
+
+                                     <span className="turno-estado">{turno.estadoTurno}</span>
+                                )}
+
                         </div>
                     );
                 })}
