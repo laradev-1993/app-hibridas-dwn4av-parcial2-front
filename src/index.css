@@ -92,7 +92,7 @@ a {
 .contenedor {
     max-width: 1000px;
     margin: 2rem auto;
-    padding: 0 1rem;
+    padding: 0 0.2rem;
 }
 
 .lista-tarjetas {
@@ -115,6 +115,28 @@ a {
 
 .tarjeta p {
     margin: 0.25rem 0;
+}
+
+
+.busqueda {
+    display: flex;
+    gap: 0.5rem;
+}
+
+
+.busqueda input {
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--color-verde-oscuro);
+    border-radius: 8px;
+    background-color: var(--color-blanco);
+    color: var(--color-verde-oscuro);
+    font-family: var(--fuente-texto);
+    font-size: 1rem;
+}
+
+.busqueda input:focus {
+    outline: 2px solid var(--color-verde-oscuro);
+    outline-offset: 1px;
 }
 
 /*---- VISTA TURNOS  ---- */
@@ -367,4 +389,96 @@ a.boton {
 .bloque-paciente h2 {
     margin: 0;
     font-size: 1.15rem;
+}
+
+
+
+/* --- Dashboard --- */
+.dashboard-cabecera {
+    display: flex;
+    align-items: stretch;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.dashboard-fecha {
+    margin: 0;
+    font-size: 2rem;
+    line-height: 1.2;
+    max-width: 200px;
+}
+
+.dashboard-fecha::first-letter {
+    text-transform: uppercase;
+}
+
+.dashboard-saludo {
+    flex: 1;
+}
+
+.dashboard-saludo h2 {
+    margin-top: 0;
+    margin-bottom: 0.25rem;
+}
+
+.dashboard-rol {
+    margin: 0 0 0.75rem;
+    font-weight: 600;
+}
+
+.dashboard-tipos h3 {
+    margin: 0 0 0.75rem;
+}
+
+.dashboard-tipos-numeros {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.dashboard-tipos-numeros div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.dashboard-tipos-numeros strong {
+    font-family: var(--fuente-titulos);
+    font-size: 1.5rem;
+}
+
+.dashboard-tabla-encabezado {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+}
+
+.dashboard-tabla-encabezado h2 {
+    margin: 0;
+}
+
+.tabla-contenedor {
+    overflow: hidden;
+    border-radius: 12px;
+    background-color: var(--color-blanco);
+    box-shadow: 0 2px 6px rgba(4, 67, 68, 0.15);
+}
+
+.tabla-turnos {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tabla-turnos th {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    font-weight: 600;
+}
+
+.tabla-turnos td {
+    padding: 0.75rem 1rem;
+}
+
+.tabla-turnos tbody tr:nth-child(odd) {
+    background-color: #e7e5e5;
 }

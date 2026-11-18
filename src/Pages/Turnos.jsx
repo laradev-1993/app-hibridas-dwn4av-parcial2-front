@@ -81,7 +81,7 @@ async function handleCambiarEstado(id, nuevoEstado) {
 );
 
 
-   return (
+      return (
         <div className="contenedor">
             <div className="encabezado-pagina">
                 <h1>Turnos</h1>
@@ -94,60 +94,71 @@ async function handleCambiarEstado(id, nuevoEstado) {
             {errorEstado ? <p className="mensaje-error">{errorEstado}</p> : null}
 
             {turnos.length === 0 ? (
-
                 <p>No hay turnos cargados.</p>
-                
             ) : (
-                <div className="lista-turnos">
-                    {turnosOrdenados.map((turno) => {
-                        const fecha = new Date(turno.fechaHora);
-                        const hora = fecha.toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit' });
-                        const dia = fecha.toLocaleDateString('es-AR');
+                <div className="tabla-contenedor">
+                    <table className="tabla-turnos">
+                        <thead>
+                            <tr>
+                                <th>Fecha</th>
+                                <th>Hora</th>
+                                <th>Paciente</th>
+                                <th>Profesional</th>
+                                <th>Motivo</th>
+                                <th>¿Primera vez?</th>
+                                <th>Estado</th>
+                                {puedeGestionar ? <th>Acciones</th> : null}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {turnosOrdenados.map((turno) => {
+                                const fecha = new Date(turno.fechaHora);
+                                const hora = fecha.toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit' });
+                                const dia = fecha.toLocaleDateString('es-AR');
 
-                        return (
-                            <div className="turno-item" key={turno._id}>
-                                <div className="turno-hora">
-                                    <strong>{hora}</strong>
-                                    <span>{dia}</span>
-                                </div>
-
-                                <div className="turno-info">
-                                    <h2>{turno.paciente?.nombreCompleto}</h2>
-                                    <p><strong>{turno.profesional}</strong></p>
-                                    <p>{turno.motivoConsulta}</p>
-                                    <p>¿Primera vez?: {turno.primeraVez ? 'Sí' : 'No'}</p>
-                                </div>
-
-                                {puedeGestionar ? (
-                                    <select
-                                        id={`estado-${turno._id}`}
-                                        name="estadoTurno"
-                                        aria-label="Estado del turno"
-                                        className="turno-estado"
-                                        value={turno.estadoTurno}
-                                        onChange={(event) => handleCambiarEstado(turno._id, event.target.value)}
-                                    >
-                                        <option value="Pendiente">Pendiente</option>
-                                        <option value="Confirmado">Confirmado</option>
-                                        <option value="Cancelado">Cancelado</option>
-                                        <option value="Completado">Completado</option>
-                                    </select>
-                                ) : (
-                                    <span className="turno-estado">{turno.estadoTurno}</span>
-                                )}
-
-                                {puedeGestionar ? (
-                                    <button
-                                        type="button"
-                                        className="boton boton-eliminar"
-                                        onClick={() => setIdAEliminar(turno._id)}
-                                    >
-                                        Eliminar
-                                    </button>
-                                ) : null}
-                            </div>
-                        );
-                    })}
+                                return (
+                                    <tr key={turno._id}>
+                                        <td>{dia}</td>
+                                        <td>{hora}</td>
+                                        <td>{turno.paciente?.nombreCompleto}</td>
+                                        <td>{turno.profesional}</td>
+                                        <td>{turno.motivoConsulta}</td>
+                                        <td>{turno.primeraVez ? 'Sí' : 'No'}</td>
+                                        <td>
+                                            {puedeGestionar ? (
+                                                <select
+                                                    id={`estado-${turno._id}`}
+                                                    name="estadoTurno"
+                                                    aria-label="Estado del turno"
+                                                    className="turno-estado"
+                                                    value={turno.estadoTurno}
+                                                    onChange={(event) => handleCambiarEstado(turno._id, event.target.value)}
+                                                >
+                                                    <option value="Pendiente">Pendiente</option>
+                                                    <option value="Confirmado">Confirmado</option>
+                                                    <option value="Cancelado">Cancelado</option>
+                                                    <option value="Completado">Completado</option>
+                                                </select>
+                                            ) : (
+                                                <span className="turno-estado">{turno.estadoTurno}</span>
+                                            )}
+                                        </td>
+                                        {puedeGestionar ? (
+                                            <td>
+                                                <button
+                                                    type="button"
+                                                    className="boton boton-eliminar"
+                                                    onClick={() => setIdAEliminar(turno._id)}
+                                                >
+                                                    Eliminar
+                                                </button>
+                                            </td>
+                                        ) : null}
+                                    </tr>
+                                );
+                            })}
+                        </tbody>
+                    </table>
                 </div>
             )}
 

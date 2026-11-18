@@ -2,7 +2,11 @@ import { useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext.jsx'
 
+
+
 function Login() {
+
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -12,16 +16,18 @@ function Login() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  async function handleSubmitLogin(event) {
+  async function handleSubmitLogin(event){
     event.preventDefault();
     setCargando(true);
     setError('');
 
-    try {
+    try{
       await login(email, password);
-//si venía de una ruta protegida, vuelve ahí; si no, va al perfil
-      const destino = location.state?.from?.pathname || '/perfil';
+
+//si venía de una ruta protegida, vuelve a entrar ahí- si no, va al perfil
+      const destino = location.state?.from?.pathname || '/';
       navigate(destino, { replace: true });
+
     } catch (error) {
       setError(error.message);
     } finally {
@@ -29,9 +35,10 @@ function Login() {
     }
   }
 
-  return (
+ return (
     <>
     <div className="contenedor-formulario">
+
         <h1>Iniciar sesión</h1>
 
         <form className="formulario" onSubmit={handleSubmitLogin}>
@@ -60,6 +67,7 @@ function Login() {
 
         <p className="mensaje-error">{error}</p>
       </div>
+
     </>
   )
 }
