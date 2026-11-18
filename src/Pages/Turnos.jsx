@@ -3,6 +3,7 @@ import { fetchPrivado } from '../service/api';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import ModalConfirmacion from '../components/ModalConfirmacion';
+import EditarTurnoForm from '../components/EditarTurnoForm';
 
 function Turnos() {
     const [turnos, setTurnos] = useState([]);
@@ -13,8 +14,12 @@ function Turnos() {
     const puedeGestionar = user.role === 'admin' || user.role === 'superAdmin';
     const [errorEstado, setErrorEstado] = useState('');
 
+
     //eliminar
     const [idAEliminar, setIdAEliminar] = useState(null);
+
+    //editar
+     const [turnoEditando, setTurnoEditando] = useState(null);
 
     useEffect(() => {
         const cargarTurnos = async () => {
@@ -65,20 +70,42 @@ async function handleCambiarEstado(id, nuevoEstado) {
             }
         }
 
+        //------- editar --------------
+    function handleGuardado(turnoActualizado){
+       
+        setTurnos(turnos.map(t =>
+            t._id === turnoActualizado._id ? {...t, ...turnoActualizado, paciente: t.paciente} : t
+        ));
+        setTurnoEditando(null);
+}
 
 
-    if (cargando) {
+    if (cargando){
         return <p className="contenedor">Cargando turnos...</p>;
     }
 
-    if (error) {
+    if (error){
         return <p className="contenedor">{error}</p>;
    }
+
+
+
+if (turnoEditando){
+    return (
+        <EditarTurnoForm
+            turno={turnoEditando}
+             onGuardar={handleGuardado}
+            onCancelar={() => setTurnoEditando(null)}
+        />
+    );
+}
 
 // ordenar los turnos de menor a mayor  
    const turnosOrdenados = [...turnos].sort(
     (a, b) => new Date(a.fechaHora) - new Date(b.fechaHora)
 );
+
+
 
 
       return (
@@ -145,6 +172,10 @@ async function handleCambiarEstado(id, nuevoEstado) {
                                         </td>
                                         {puedeGestionar ? (
                                             <td>
+                                                <button className="boton boton-secundario" onClick={() => setTurnoEditando(turno)}>
+                                                    Editar
+                                                </button>
+
                                                 <button
                                                     type="button"
                                                     className="boton boton-eliminar"
