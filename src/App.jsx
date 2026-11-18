@@ -1,6 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import './index.css';
 import Home from './pages/Home';
+import Footer from './components/Footer';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Perfil from './pages/Perfil';
@@ -17,7 +18,7 @@ function App() {
     return (
       <>
       <Navbar />
-
+    <main className="principal">
         <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
@@ -40,6 +41,9 @@ function App() {
        <Route path="/acceso-denegado" element={<AccesoDenegado />} />
         <Route path="*" element={<NotFound />} />
         </Routes>
+    </main>
+        <Footer />
+
          </>
     );
 }

@@ -195,8 +195,8 @@ function NuevoTurno() {
                                 onChange={(event) => setBusqueda(event.target.value)}
                                 onKeyDown={handleTeclaBusqueda}
                             />
-                            <button type="button" className="boton" onClick={handleBuscar}>
-                                Buscar
+                            <button type="button" className="boton boton-secundario-buscar" onClick={handleBuscar}>
+                                Buscar paciente
                             </button>
 
                             {errorBusqueda ? <p className="mensaje-error">{errorBusqueda}</p> : null}
@@ -213,7 +213,7 @@ function NuevoTurno() {
                                     <span>{paciente.nombreCompleto} · {paciente.obraSocial}</span>
                                     <button
                                         type="button"
-                                        className="boton"
+                                        className="boton boton-seleccionar"
                                         onClick={() => handleSeleccionar(paciente)}
                                     >
                                         Seleccionar
@@ -266,7 +266,7 @@ function NuevoTurno() {
                             />
 
                             <button type="button" className="boton" onClick={handleVolverABuscar}>
-                                Volver a buscar
+                                Volver a la busqueda
                             </button>
                         </>
                     ) : null}

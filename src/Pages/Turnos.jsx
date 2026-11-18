@@ -172,13 +172,13 @@ if (turnoEditando){
                                         </td>
                                         {puedeGestionar ? (
                                             <td>
-                                                <button className="boton boton-secundario" onClick={() => setTurnoEditando(turno)}>
+                                                <button className="boton boton-secundario boton-tabla" onClick={() => setTurnoEditando(turno)}>
                                                     Editar
                                                 </button>
 
                                                 <button
                                                     type="button"
-                                                    className="boton boton-eliminar"
+                                                    className="boton boton-eliminar boton-tabla"
                                                     onClick={() => setIdAEliminar(turno._id)}
                                                 >
                                                     Eliminar

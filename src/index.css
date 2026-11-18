@@ -29,6 +29,16 @@ a {
     color: var(--color-verde-oscuro);
 }
 
+#root {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.principal {
+    flex: 1;
+}
+
 /*--- Navbar ------*/
 .navbar {
     display: flex;
@@ -86,6 +96,17 @@ a {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 1rem;
+}
+
+
+/*<<<<   FOOTER  >>>*/
+
+.footer {
+    background-color: var(--color-verde-oscuro);
+    color: var(--color-blanco);
+    text-align: center;
+    padding: 0.5rem 0.5rem;
+    margin-top: 3rem;
 }
 
 /* <<< Vista Paciente >>> */
@@ -213,6 +234,17 @@ select.turno-estado option {
     gap: 0.5rem;
 }
 
+
+.boton-seleccionar{
+    background-color: transparent;
+    color: var(--color-verde-oscuro);
+    text-decoration: underline;
+    border: none;
+}
+
+.boton-secundario-buscar{
+    background-color: #6f8f8f; 
+}
 
 .boton-eliminar {
     background-color: transparent;
@@ -481,4 +513,56 @@ a.boton {
 
 .tabla-turnos tbody tr:nth-child(odd) {
     background-color: #e7e5e5;
+}
+
+
+.boton-tabla {
+    width: 6rem;
+    text-align: center;
+    margin-top: 0.3rem;
+}
+
+/* --- Vista perfil  */
+.perfil {
+    max-width: 520px;
+    margin: 0 auto;
+}
+
+.perfil-tarjeta {
+    background-color: var(--color-blanco);
+    border: 1px solid var(--color-aguamarina);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.perfil-cabecera {
+    background-color: var(--color-verde-oscuro);
+    padding: 2rem;
+    text-align: center;
+}
+
+.perfil-cabecera h2 {
+    color: var(--color-blanco);
+    margin: 0;
+}
+
+.perfil-datos {
+    padding: 1rem 2rem 2rem;
+}
+
+.perfil-fila {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 0;
+    border-bottom: 1px solid var(--color-aguamarina);
+}
+
+.perfil-fila:last-child {
+    border-bottom: none;
+}
+
+.perfil-etiqueta {
+    font-weight: 600;
+    color: var(--color-verde-oscuro);
 }
